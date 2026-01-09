@@ -1,0 +1,139 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "fit vw_analysis_master",
+          "nodeLineageTag": "01a35e98-af22-4e9e-b8df-dd75bd6a7b55",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 284,
+            "y": 38
+          },
+          "nodeIndex": "fit vw_compare_to_ideal",
+          "nodeLineageTag": "3410d201-1515-4b43-90e2-30cde8e3296e",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 568,
+            "y": 50
+          },
+          "nodeIndex": "fit vw_composite_recommendations",
+          "nodeLineageTag": "909a21d7-3f7c-4d52-9ad1-afbc06a2bfcd",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 0
+          },
+          "nodeIndex": "fit vw_daily_activity",
+          "nodeLineageTag": "9fd7eb57-bd76-4d84-bf7d-a81e14765320",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1136,
+            "y": 38
+          },
+          "nodeIndex": "fit vw_daily_activity_summary",
+          "nodeLineageTag": "e2b5c427-a1ec-44d7-9740-2e90fef48b37",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1420,
+            "y": 0
+          },
+          "nodeIndex": "fit vw_latest_daily_activity",
+          "nodeLineageTag": "b8e645db-9233-475d-b1d2-cb59f01053fb",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1704,
+            "y": 50
+          },
+          "nodeIndex": "fit scored_comparison",
+          "nodeLineageTag": "4d097fbe-6b4b-41ef-b8fc-c0ff33c6aaa2",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1988,
+            "y": 38
+          },
+          "nodeIndex": "fit vw_compare_to_ideal (2)",
+          "nodeLineageTag": "18a745f6-02ce-4abe-a94a-86d59e6de6f2",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2272,
+            "y": 50
+          },
+          "nodeIndex": "fit vw_composite_recommendations (2)",
+          "nodeLineageTag": "5564a75b-7809-4e60-8ecf-c0aa662e7a87",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

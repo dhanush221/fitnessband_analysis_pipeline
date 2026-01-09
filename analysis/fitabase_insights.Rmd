@@ -1,0 +1,162 @@
+---
+title: "Fitabase Data Insights Report"
+output: html_document
+---
+
+# Fitness Band Data Insights
+
+This report analyzes the Fitabase data to extract patterns in physical activity, sleep, and heart rate.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(scales)
+```
+
+## 1. Data Loading
+
+Loading key datasets from the `data/raw/Fitabase Data 3.12.16-4.11.16` directory.
+
+```{r load_data}
+base_path <- "../data/raw/Fitabase Data 3.12.16-4.11.16/"
+
+# Daily Activity
+daily_activity <- read_csv(paste0(base_path, "dailyActivity_merged.csv")) %>%
+  mutate(ActivityDate = as.Date(ActivityDate, format="%m/%d/%Y"))
+
+# Hourly Steps
+hourly_steps <- read_csv(paste0(base_path, "hourlySteps_merged.csv")) %>%
+  mutate(ActivityHour = as.POSIXct(ActivityHour, format="%m/%d/%Y %I:%M:%S %p", tz="UTC"))
+
+# Sleep Minutes
+minute_sleep <- read_csv(paste0(base_path, "minuteSleep_merged.csv")) %>%
+  mutate(date = as.POSIXct(date, format="%m/%d/%Y %I:%M:%S %p", tz="UTC"))
+
+# Weight Log (Optional, check if empty)
+weight_log <- read_csv(paste0(base_path, "weightLogInfo_merged.csv"))
+
+print(paste("Daily Activity Records:", nrow(daily_activity)))
+print(paste("Hourly Steps Records:", nrow(hourly_steps)))
+```
+
+## 2. Daily Activity Summary
+
+Overview of daily physical metrics.
+
+```{r activity_summary}
+daily_summary <- daily_activity %>%
+  summarise(
+    Avg_Steps = mean(TotalSteps),
+    Avg_Calories = mean(Calories),
+    Avg_Distance = mean(TotalDistance),
+    Very_Active_Mins = mean(VeryActiveMinutes),
+    Sedentary_Mins = mean(SedentaryMinutes)
+  )
+
+print(daily_summary)
+
+# Distribution of Total Steps
+ggplot(daily_activity, aes(x = TotalSteps)) +
+  geom_histogram(binwidth = 1000, fill = "#3498db", color = "white") +
+  labs(title = "Distribution of Daily Steps", x = "Total Steps", y = "Frequency") +
+  theme_minimal()
+```
+
+## 3. Hourly Activity Patterns
+
+Identifying peak activity times during the day.
+
+```{r hourly_patterns}
+hourly_patterns <- hourly_steps %>%
+  mutate(
+    Hour = hour(ActivityHour),
+    Weekday = wday(ActivityHour, label = TRUE, abbr = TRUE)
+  ) %>%
+  group_by(Weekday, Hour) %>%
+  summarise(Avg_Steps = mean(StepTotal), .groups = 'drop')
+
+# Heatmap: Day vs Hour
+ggplot(hourly_patterns, aes(x = Hour, y = Weekday, fill = Avg_Steps)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "#e74c3c") +
+  labs(title = "Average Hourly Steps Heatmap", x = "Hour of Day", y = "Day of Week") +
+  theme_minimal() +
+  scale_x_continuous(breaks = seq(0, 23, 2))
+```
+
+## 4. Sleep Analysis
+
+Aggregating minute-level sleep data to daily duration.
+
+```{r sleep_analysis}
+daily_sleep <- minute_sleep %>%
+  mutate(Date = as.Date(date)) %>%
+  group_by(Id, Date) %>%
+  summarise(
+    Sleep_Minutes = n(),
+    Sleep_Hours = n() / 60,
+    .groups = 'drop'
+  )
+
+# Sleep Duration Histogram
+ggplot(daily_sleep, aes(x = Sleep_Hours)) +
+  geom_histogram(binwidth = 0.5, fill = "#8e44ad", color = "white") +
+  labs(title = "Distribution of Sleep Duration", x = "Sleep (Hours)", y = "Count") +
+  geom_vline(xintercept = 7, linetype="dashed", color="red", size=(1)) +
+  annotate("text", x=7.2, y=5, label="Rec. 7h", color="red", angle=90) +
+  theme_minimal()
+```
+
+## 5. Correlations
+
+Is there a relation between how active you are and how well you sleep?
+
+```{r correlations}
+merged_data <- inner_join(daily_activity, daily_sleep, by = c("Id", "ActivityDate" = "Date"))
+
+# Steps vs Sleep
+ggplot(merged_data, aes(x = TotalSteps, y = Sleep_Hours)) +
+  geom_point(alpha = 0.6, color = "#2c3e50") +
+  geom_smooth(method = "lm", color = "#e67e22") +
+  labs(title = "Correlation: Daily Steps vs Sleep Duration", x = "Daily Steps", y = "Sleep Hours") +
+  theme_minimal()
+
+cor_val <- cor(merged_data$TotalSteps, merged_data$Sleep_Hours)
+print(paste("Correlation between Steps and Sleep:", round(cor_val, 3)))
+```
+
+## 6. User vs. Ideal Comparison
+
+Benchmarking the average user in this dataset against health standards.
+
+```{r ideal_comparison}
+# Calculate User Profile
+user_profile <- merged_data %>%
+  summarise(
+    Steps = mean(TotalSteps),
+    Calories = mean(Calories),
+    Sleep_Hours = mean(Sleep_Hours)
+  ) %>%
+  mutate(Type = "User Average")
+
+# Define Ideal Profile
+ideal_profile <- data.frame(
+  Steps = 10000,
+  Calories = 2500,
+  Sleep_Hours = 8,
+  Type = "Ideal Healthy"
+)
+
+comparison <- bind_rows(user_profile, ideal_profile) %>%
+  pivot_longer(cols = c(Steps, Calories, Sleep_Hours), names_to = "Metric", values_to = "Value")
+
+# Plot
+ggplot(comparison, aes(x = Type, y = Value, fill = Type)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  facet_wrap(~Metric, scales = "free_y") +
+  theme_minimal() +
+  labs(title = "User vs. Ideal Benchmark", y = "Value", x = "") +
+  scale_fill_manual(values = c("User Average" = "#3498db", "Ideal Healthy" = "#2ecc71"))
+```

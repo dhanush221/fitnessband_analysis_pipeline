@@ -1,0 +1,104 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "e7f443b9c076a15aa8c0",
+  "position": {
+    "x": 32,
+    "y": 0,
+    "z": 0,
+    "height": 288,
+    "width": 480.00000000000006,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fit vw_analysis_master"
+                        }
+                      },
+                      "Property": "total_steps"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(fit vw_analysis_master.total_steps)",
+              "nativeQueryRef": "Average of total_steps"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fit vw_analysis_master"
+                        }
+                      },
+                      "Property": "sleep_hours"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(fit vw_analysis_master.sleep_hours)",
+              "nativeQueryRef": "Average of sleep_hours"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fit vw_analysis_master"
+                        }
+                      },
+                      "Property": "calories"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "Sum(fit vw_analysis_master.calories)",
+              "nativeQueryRef": "Count of calories"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "fit vw_analysis_master"
+                      }
+                    },
+                    "Property": "total_steps"
+                  }
+                },
+                "Function": 1
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

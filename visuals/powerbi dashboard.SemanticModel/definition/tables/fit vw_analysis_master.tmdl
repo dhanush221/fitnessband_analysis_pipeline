@@ -1,0 +1,140 @@
+table 'fit vw_analysis_master'
+	lineageTag: 01a35e98-af22-4e9e-b8df-dd75bd6a7b55
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 96788eb1-1637-44cd-99dd-510e68794782
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 92a979a2-117b-4ae4-af26-68d3ad566d47
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 15778cc8-3b0d-40a7-ad21-6f5857a1e578
+			defaultHierarchy: LocalDateTable_f389d281-0093-449c-add9-2756282f5eff.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column total_steps
+		dataType: int64
+		formatString: 0
+		lineageTag: 9536cbce-327b-406d-b2cc-aa16ecd77cde
+		summarizeBy: sum
+		sourceColumn: total_steps
+
+		annotation SummarizationSetBy = Automatic
+
+	column calories
+		dataType: double
+		lineageTag: e17b1018-0042-4350-a0eb-e2034151ca76
+		summarizeBy: sum
+		sourceColumn: calories
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_distance
+		dataType: double
+		lineageTag: a387d8fc-3576-4fc1-ab7a-c3259d075624
+		summarizeBy: sum
+		sourceColumn: total_distance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column very_active_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: b4296c70-f69d-4086-ad3d-9781614c8aa7
+		summarizeBy: sum
+		sourceColumn: very_active_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column fairly_active_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c9c6e7f-4e51-4032-9885-6890ac915d33
+		summarizeBy: sum
+		sourceColumn: fairly_active_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column sedentary_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 1494d077-5898-48ea-b360-2c9b4bdda75a
+		summarizeBy: sum
+		sourceColumn: sedentary_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column sleep_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 4aa65431-560d-4413-8b76-bbd4089be15b
+		summarizeBy: sum
+		sourceColumn: sleep_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column sleep_hours
+		dataType: double
+		lineageTag: c2f237d8-fb08-4bce-8aea-e8a1a9225c88
+		summarizeBy: sum
+		sourceColumn: sleep_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column goal_met_steps
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 755881bf-03a6-40d6-a9ef-f2ebe2523c42
+		summarizeBy: none
+		sourceColumn: goal_met_steps
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal_met_sleep
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a3a7c3a0-f32e-47b3-9eb1-a1f43f2fc65c
+		summarizeBy: none
+		sourceColumn: goal_met_sleep
+
+		annotation SummarizationSetBy = Automatic
+
+	column row_key
+		dataType: string
+		lineageTag: d1f1c437-904e-4520-a618-50c6cf65b651
+		summarizeBy: none
+		sourceColumn: row_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'fit vw_analysis_master' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5433", "fitbit"),
+				    fit_vw_analysis_master = Source{[Schema="fit",Item="vw_analysis_master"]}[Data]
+				in
+				    fit_vw_analysis_master
+
+	annotation PBI_ResultType = Table
+

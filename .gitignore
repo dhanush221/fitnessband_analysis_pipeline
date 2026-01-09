@@ -1,0 +1,25 @@
+# Local data and outputs
+data/processed/
+outputs/
+
+# Env files
+.env
+.pgpass
+
+# Postgres data
+pgdata/
+
+# Python
+.venv/
+__pycache__/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Power BI
+*.pbix.loc
+*.lock
+.pbi/
+localSettings.json
+cache/

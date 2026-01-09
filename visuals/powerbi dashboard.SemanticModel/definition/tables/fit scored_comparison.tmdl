@@ -1,0 +1,64 @@
+table 'fit scored_comparison'
+	lineageTag: 4d097fbe-6b4b-41ef-b8fc-c0ff33c6aaa2
+
+	column generated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d269c12f-89a5-4ad4-87e9-06462e0fcedb
+		summarizeBy: none
+		sourceColumn: generated_at
+
+		variation Variation
+			isDefault
+			relationship: e29ac141-6773-4989-a2f2-f3ef2c0ee085
+			defaultHierarchy: LocalDateTable_2cde6762-b1b9-4572-9010-70d043e4fff9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column type
+		dataType: string
+		lineageTag: 1dd25918-aaba-45a5-a670-95917f86441e
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric
+		dataType: string
+		lineageTag: b381eba7-cb1a-4c49-a8ab-f177280c0001
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		lineageTag: 303c0ceb-6334-45fa-8086-fce52ff918f1
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column performance_percent
+		dataType: double
+		lineageTag: 92265f25-29b7-4cf6-9b7b-9e20ac3d816b
+		summarizeBy: sum
+		sourceColumn: performance_percent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'fit scored_comparison' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5433", "fitbit"),
+				    fit_scored_comparison = Source{[Schema="fit",Item="scored_comparison"]}[Data]
+				in
+				    fit_scored_comparison
+
+	annotation PBI_ResultType = Table
+

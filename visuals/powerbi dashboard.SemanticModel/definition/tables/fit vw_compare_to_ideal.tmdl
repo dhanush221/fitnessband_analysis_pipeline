@@ -1,0 +1,76 @@
+table 'fit vw_compare_to_ideal'
+	lineageTag: 3410d201-1515-4b43-90e2-30cde8e3296e
+
+	column metric
+		dataType: string
+		lineageTag: e6320b8e-22d3-4fc1-b59e-e5877d93f624
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column period_start
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0c74c77d-4c4e-4bf2-8298-3ac000e548ad
+		summarizeBy: none
+		sourceColumn: period_start
+
+		variation Variation
+			isDefault
+			relationship: a13ff323-3fcd-4b13-a2b6-954adca29c65
+			defaultHierarchy: LocalDateTable_d9cc940e-ded4-4403-b474-9e01d053be9d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column value
+		dataType: double
+		lineageTag: bcdea73d-c348-4e3a-a843-f58c1694924c
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ideal_value
+		dataType: double
+		lineageTag: 5d575835-f486-49b3-bd39-7ef163478e5d
+		summarizeBy: sum
+		sourceColumn: ideal_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column diff_from_ideal
+		dataType: double
+		lineageTag: f29ece65-3cd3-46c7-b9f7-1044df4657d4
+		summarizeBy: sum
+		sourceColumn: diff_from_ideal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unit
+		dataType: string
+		lineageTag: 79083246-5df6-4049-80cf-7f8cf025aec1
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'fit vw_compare_to_ideal' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5433", "fitbit"),
+				    fit_vw_compare_to_ideal = Source{[Schema="fit",Item="vw_compare_to_ideal"]}[Data]
+				in
+				    fit_vw_compare_to_ideal
+
+	annotation PBI_ResultType = Table
+

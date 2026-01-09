@@ -1,0 +1,40 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["fit vw_analysis_master","fit vw_compare_to_ideal","fit vw_composite_recommendations","fit vw_daily_activity","fit vw_daily_activity_summary","fit vw_latest_daily_activity","fit vw_compare_to_ideal (2)","fit vw_composite_recommendations (2)","fit scored_comparison"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'fit vw_analysis_master'
+ref table DateTableTemplate_afa98ca0-18f0-4eeb-8957-0965a4d48857
+ref table LocalDateTable_f389d281-0093-449c-add9-2756282f5eff
+ref table 'fit vw_compare_to_ideal'
+ref table LocalDateTable_d9cc940e-ded4-4403-b474-9e01d053be9d
+ref table 'fit vw_composite_recommendations'
+ref table LocalDateTable_0bc16149-6b54-4f0d-af06-120d0322a762
+ref table LocalDateTable_75242e94-995c-4af5-bbc0-97794bd0e2af
+ref table 'fit vw_daily_activity'
+ref table LocalDateTable_aff748f7-78c0-4a0b-817b-83e1d9673fd2
+ref table LocalDateTable_2a9db062-44ae-4cfb-9684-bd015af52368
+ref table 'fit vw_daily_activity_summary'
+ref table LocalDateTable_e26bb502-566a-4fa9-9116-6df58e522db3
+ref table 'fit vw_latest_daily_activity'
+ref table LocalDateTable_8795fdad-30ac-4c7c-9d98-ab8b6714c810
+ref table LocalDateTable_de02eee6-c31a-4410-a6a8-33b6212db256
+ref table 'fit vw_compare_to_ideal (2)'
+ref table LocalDateTable_b0f45996-51df-4312-b975-ad676e81c8f2
+ref table 'fit vw_composite_recommendations (2)'
+ref table LocalDateTable_8daba64d-5eef-42a2-ae5f-58d52329159d
+ref table LocalDateTable_3012fa7d-8c29-498a-a428-9ed520cc17a5
+ref table 'fit scored_comparison'
+ref table LocalDateTable_2cde6762-b1b9-4572-9010-70d043e4fff9
+
+ref cultureInfo en-CA
+

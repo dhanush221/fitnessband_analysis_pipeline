@@ -1,0 +1,128 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "b7a9644fac5369cc3e79",
+  "position": {
+    "x": 608,
+    "y": 384,
+    "z": 3000,
+    "height": 304,
+    "width": 480,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fit vw_analysis_master"
+                    }
+                  },
+                  "Property": "date"
+                }
+              },
+              "queryRef": "fit vw_analysis_master.date",
+              "nativeQueryRef": "date"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fit vw_analysis_master"
+                        }
+                      },
+                      "Property": "calories"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(fit vw_analysis_master.calories)",
+              "nativeQueryRef": "Average of calories",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fit vw_analysis_master"
+                    }
+                  },
+                  "Property": "sleep_hours"
+                }
+              },
+              "queryRef": "Sum(fit vw_analysis_master.sleep_hours)",
+              "nativeQueryRef": "sleep_hours"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "categoryAxis": [
+        {
+          "properties": {
+            "gridlineAutoScale": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "zoom": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "trend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "displayName": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Trend line 1'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

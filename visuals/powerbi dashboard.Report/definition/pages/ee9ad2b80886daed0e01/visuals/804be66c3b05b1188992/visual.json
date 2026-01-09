@@ -1,0 +1,102 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "804be66c3b05b1188992",
+  "position": {
+    "x": 608,
+    "y": 0,
+    "z": 2000,
+    "height": 288,
+    "width": 480.00000000000006,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fit vw_analysis_master"
+                    }
+                  },
+                  "Property": "date"
+                }
+              },
+              "queryRef": "fit vw_analysis_master.date",
+              "nativeQueryRef": "date"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fit vw_analysis_master"
+                    }
+                  },
+                  "Property": "sleep_hours"
+                }
+              },
+              "queryRef": "Sum(fit vw_analysis_master.sleep_hours)",
+              "nativeQueryRef": "sleep_hours",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fit vw_analysis_master"
+                        }
+                      },
+                      "Property": "total_steps"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(fit vw_analysis_master.total_steps)",
+              "nativeQueryRef": "Average of total_steps"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "trend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "displayName": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Trend line 1'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

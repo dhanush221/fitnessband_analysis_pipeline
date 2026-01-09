@@ -1,0 +1,65 @@
+relationship 15778cc8-3b0d-40a7-ad21-6f5857a1e578
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_analysis_master'.date
+	toColumn: LocalDateTable_f389d281-0093-449c-add9-2756282f5eff.Date
+
+relationship a13ff323-3fcd-4b13-a2b6-954adca29c65
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_compare_to_ideal'.period_start
+	toColumn: LocalDateTable_d9cc940e-ded4-4403-b474-9e01d053be9d.Date
+
+relationship 29c5bdc1-7433-4686-845e-758ce9e4c780
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_composite_recommendations'.composite_generated_at
+	toColumn: LocalDateTable_0bc16149-6b54-4f0d-af06-120d0322a762.Date
+
+relationship f6db0980-7def-4a6e-a74d-38319a357fa9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_composite_recommendations'.rec_generated_at
+	toColumn: LocalDateTable_75242e94-995c-4af5-bbc0-97794bd0e2af.Date
+
+relationship 8f7023c1-4f04-4414-b225-bf8fe8491b1a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_daily_activity'.activity_date
+	toColumn: LocalDateTable_aff748f7-78c0-4a0b-817b-83e1d9673fd2.Date
+
+relationship 4b14ad8b-bb14-4f29-9b12-b0fd9a64d053
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_daily_activity'.week_start
+	toColumn: LocalDateTable_2a9db062-44ae-4cfb-9684-bd015af52368.Date
+
+relationship 90c58d04-c719-4594-aaf4-f9952069b59c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_daily_activity_summary'.activity_date
+	toColumn: LocalDateTable_e26bb502-566a-4fa9-9116-6df58e522db3.Date
+
+relationship e0b00faf-1e1e-41cf-b818-69565984b4bd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_latest_daily_activity'.activity_date
+	toColumn: LocalDateTable_8795fdad-30ac-4c7c-9d98-ab8b6714c810.Date
+
+relationship c613b6e6-7734-4901-ad87-c5becc8d9866
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_latest_daily_activity'.week_start
+	toColumn: LocalDateTable_de02eee6-c31a-4410-a6a8-33b6212db256.Date
+
+relationship 30e7691e-9f12-4204-a5f4-6d48a26920a9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_compare_to_ideal (2)'.period_start
+	toColumn: LocalDateTable_b0f45996-51df-4312-b975-ad676e81c8f2.Date
+
+relationship fa9dbbb0-4e50-48c0-9831-af944b2042f4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_composite_recommendations (2)'.composite_generated_at
+	toColumn: LocalDateTable_8daba64d-5eef-42a2-ae5f-58d52329159d.Date
+
+relationship 8bd80cb6-852c-4e63-8006-f9d2087e3093
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit vw_composite_recommendations (2)'.rec_generated_at
+	toColumn: LocalDateTable_3012fa7d-8c29-498a-a428-9ed520cc17a5.Date
+
+relationship e29ac141-6773-4989-a2f2-f3ef2c0ee085
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'fit scored_comparison'.generated_at
+	toColumn: LocalDateTable_2cde6762-b1b9-4572-9010-70d043e4fff9.Date
+

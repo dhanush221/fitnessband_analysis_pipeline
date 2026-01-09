@@ -1,0 +1,78 @@
+table 'fit vw_daily_activity_summary'
+	lineageTag: e2b5c427-a1ec-44d7-9740-2e90fef48b37
+
+	column activity_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8d447c88-b9da-46e9-a61c-6c8061626aa0
+		summarizeBy: none
+		sourceColumn: activity_date
+
+		variation Variation
+			isDefault
+			relationship: 90c58d04-c719-4594-aaf4-f9952069b59c
+			defaultHierarchy: LocalDateTable_e26bb502-566a-4fa9-9116-6df58e522db3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column distinct_users
+		dataType: int64
+		formatString: 0
+		lineageTag: 66ed22ce-255f-4efd-a0b6-251fae03fef6
+		summarizeBy: sum
+		sourceColumn: distinct_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_steps
+		dataType: int64
+		formatString: 0
+		lineageTag: 3697ab8c-a9f1-42f5-9276-210ce9e1046d
+		summarizeBy: sum
+		sourceColumn: total_steps
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_steps_per_user
+		dataType: double
+		lineageTag: df185205-92c2-4c86-b0e1-a0276e095f50
+		summarizeBy: sum
+		sourceColumn: avg_steps_per_user
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_very_active_minutes
+		dataType: double
+		lineageTag: b60fcf09-48bf-497f-bc9c-dabb9766bfc6
+		summarizeBy: sum
+		sourceColumn: avg_very_active_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_sedentary_minutes
+		dataType: double
+		lineageTag: 9013b0bc-a366-4fb8-9e61-bde5720de96a
+		summarizeBy: sum
+		sourceColumn: avg_sedentary_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'fit vw_daily_activity_summary' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5433", "fitbit"),
+				    fit_vw_daily_activity_summary = Source{[Schema="fit",Item="vw_daily_activity_summary"]}[Data]
+				in
+				    fit_vw_daily_activity_summary
+
+	annotation PBI_ResultType = Table
+

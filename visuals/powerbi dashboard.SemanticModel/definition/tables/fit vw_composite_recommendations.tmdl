@@ -1,0 +1,68 @@
+table 'fit vw_composite_recommendations'
+	lineageTag: 909a21d7-3f7c-4d52-9ad1-afbc06a2bfcd
+
+	column composite_generated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 340fff32-4968-4f66-94d2-a5f72bcec652
+		summarizeBy: none
+		sourceColumn: composite_generated_at
+
+		variation Variation
+			isDefault
+			relationship: 29c5bdc1-7433-4686-845e-758ce9e4c780
+			defaultHierarchy: LocalDateTable_0bc16149-6b54-4f0d-af06-120d0322a762.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column composite_health_score
+		dataType: double
+		lineageTag: dcc77dcc-0d5c-4a2d-854f-e78d48314b97
+		summarizeBy: sum
+		sourceColumn: composite_health_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tier
+		dataType: string
+		lineageTag: 88c6019c-876c-4a60-a6c4-4438fbc40b7a
+		summarizeBy: none
+		sourceColumn: tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column rec_generated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 635e4134-cce3-44fc-8973-436f0f50c47c
+		summarizeBy: none
+		sourceColumn: rec_generated_at
+
+		variation Variation
+			isDefault
+			relationship: f6db0980-7def-4a6e-a74d-38319a357fa9
+			defaultHierarchy: LocalDateTable_75242e94-995c-4af5-bbc0-97794bd0e2af.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column recommendation
+		dataType: string
+		lineageTag: c6f26532-4d99-43c3-ac48-01e9a80202d3
+		summarizeBy: none
+		sourceColumn: recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'fit vw_composite_recommendations' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5433", "fitbit"),
+				    fit_vw_composite_recommendations = Source{[Schema="fit",Item="vw_composite_recommendations"]}[Data]
+				in
+				    fit_vw_composite_recommendations
+
+	annotation PBI_ResultType = Table
+

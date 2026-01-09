@@ -1,0 +1,120 @@
+table 'fit vw_latest_daily_activity'
+	lineageTag: b8e645db-9233-475d-b1d2-cb59f01053fb
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: ce9b302c-0ea7-4e4e-b11e-bb0178a906fb
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 94f788a5-ecb9-49a5-85c6-2fad5f044472
+		summarizeBy: none
+		sourceColumn: activity_date
+
+		variation Variation
+			isDefault
+			relationship: e0b00faf-1e1e-41cf-b818-69565984b4bd
+			defaultHierarchy: LocalDateTable_8795fdad-30ac-4c7c-9d98-ab8b6714c810.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column week_start
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5836ee41-eca7-4593-8c1c-37c86b907df2
+		summarizeBy: none
+		sourceColumn: week_start
+
+		variation Variation
+			isDefault
+			relationship: c613b6e6-7734-4901-ad87-c5becc8d9866
+			defaultHierarchy: LocalDateTable_de02eee6-c31a-4410-a6a8-33b6212db256.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column day_of_week
+		dataType: int64
+		formatString: 0
+		lineageTag: b2c54483-32fd-4534-8c5c-8a9ebb0cdd0c
+		summarizeBy: sum
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_steps
+		dataType: int64
+		formatString: 0
+		lineageTag: 720931e5-e76b-4fc7-b8d5-9150fa9ff782
+		summarizeBy: sum
+		sourceColumn: total_steps
+
+		annotation SummarizationSetBy = Automatic
+
+	column calories
+		dataType: double
+		lineageTag: ab6ffd19-1f7e-4375-a727-e3fffb4337a5
+		summarizeBy: sum
+		sourceColumn: calories
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_distance
+		dataType: double
+		lineageTag: 5c4df81b-dbf3-4c60-8dbb-29fd7a9cdc5a
+		summarizeBy: sum
+		sourceColumn: total_distance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column very_active_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d3035e2-5fe6-40c1-9599-a6cea89d4dea
+		summarizeBy: sum
+		sourceColumn: very_active_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column fairly_active_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: ef0fdd9e-1d55-49e4-b9c2-39da54aa69ca
+		summarizeBy: sum
+		sourceColumn: fairly_active_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column sedentary_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 31deb085-6c2e-4f31-958e-5f6803aa882f
+		summarizeBy: sum
+		sourceColumn: sedentary_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'fit vw_latest_daily_activity' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5433", "fitbit"),
+				    fit_vw_latest_daily_activity = Source{[Schema="fit",Item="vw_latest_daily_activity"]}[Data]
+				in
+				    fit_vw_latest_daily_activity
+
+	annotation PBI_ResultType = Table
+
