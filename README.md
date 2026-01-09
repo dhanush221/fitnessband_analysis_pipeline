@@ -1,6 +1,6 @@
 #  Fitness Band Data Insights Pipeline
 
-![Dashboard Preview](visuals/dashboard_preview.png)
+
 
 > **An end-to-end analytics pipeline** that processes raw fitness tracker data, scores user health against ideal benchmarks, and visualizes trends in real-time using Power BI and R.
 
