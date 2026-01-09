@@ -34,6 +34,9 @@ This project is a full-stack data engineering and analysis solution designed to 
 
 The pipeline automatically generates static analysis plots in addition to the Power BI dashboard.
 
+### Dashboard Preview
+![Dashboard Preview](visuals/dashboard_preview.png)
+
 ### 1. User vs Ideal Benchmarks
 *How does the user compare to health standards (10k steps, 8h sleep)?*
 ![User vs Ideal](visuals/user_vs_ideal.png)
